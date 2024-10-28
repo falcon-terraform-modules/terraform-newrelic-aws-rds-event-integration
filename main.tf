@@ -205,8 +205,7 @@ resource "aws_iam_role_policy_attachment" "sns" {
 }
 
 resource "aws_sns_topic" "main" {
-  name              = local.sns_topic_name
-  kms_master_key_id = "alias/aws/sns"
+  name = local.sns_topic_name
   tags = {
     Name = local.sns_topic_name
   }
