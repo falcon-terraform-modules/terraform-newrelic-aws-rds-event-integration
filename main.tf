@@ -219,11 +219,12 @@ resource "aws_sns_topic_subscription" "main" {
 }
 
 resource "aws_db_event_subscription" "this" {
-  for_each    = { for i in var.event_subscriptions : i.name => i }
-  name        = each.value.name
-  sns_topic   = aws_sns_topic.main.arn
-  source_type = each.value.source_type
-  source_ids  = each.value.source_ids
+  for_each         = { for i in var.event_subscriptions : i.name => i }
+  name             = each.value.name
+  sns_topic        = aws_sns_topic.main.arn
+  source_type      = each.value.source_type
+  source_ids       = each.value.source_ids
+  event_categories = each.value.event_categories
   tags = {
     Name = each.value.name
   }
